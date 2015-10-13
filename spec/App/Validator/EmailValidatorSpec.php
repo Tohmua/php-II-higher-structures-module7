@@ -34,4 +34,9 @@ class EmailValidatorSpec extends ObjectBehavior
             $this->validate($email)->shouldReturn(false);
         }
     }
+
+    public function it_should_return_error_message()
+    {
+        $this->getError('EmailValidator failed');
+    }
 }

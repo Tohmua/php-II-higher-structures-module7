@@ -10,4 +10,9 @@ class StringValidator implements Validator
     {
         return is_string($value);
     }
+
+    public function getError()
+    {
+        return EmailValidator::class . ' failed';
+    }
 }

@@ -31,4 +31,9 @@ class StringValidatorSpec extends ObjectBehavior
     {
         $this->validate(new \stdClass)->shouldReturn(false);
     }
+
+    public function it_should_return_error_message()
+    {
+        $this->getError('StringValidator failed');
+    }
 }

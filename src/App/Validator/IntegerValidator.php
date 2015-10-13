@@ -10,4 +10,9 @@ class IntegerValidator implements Validator
     {
         return is_int($value);
     }
+
+    public function getError()
+    {
+        return EmailValidator::class . ' failed';
+    }
 }

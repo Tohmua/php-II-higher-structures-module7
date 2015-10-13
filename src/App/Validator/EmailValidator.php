@@ -10,4 +10,9 @@ class EmailValidator implements Validator
     {
         return !filter_var($email, FILTER_VALIDATE_EMAIL) ? false : true;
     }
+
+    public function getError()
+    {
+        return EmailValidator::class . ' failed';
+    }
 }
