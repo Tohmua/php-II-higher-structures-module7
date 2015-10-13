@@ -6,8 +6,5 @@ abstract class ViewHelper
 {
     protected $field;
 
-    public function __toString()
-    {
-        return $this->field;
-    }
+    abstract public function display();
 }
