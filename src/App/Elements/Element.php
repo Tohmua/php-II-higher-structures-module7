@@ -9,7 +9,7 @@ use App\ViewHelpers\ViewHelper;
 
 abstract class Element
 {
-    public $viewHelper;
+    protected $viewHelper;
     private $validators = [];
     private $filters    = [];
     private $name       = '';
