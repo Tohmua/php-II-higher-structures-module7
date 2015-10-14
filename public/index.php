@@ -11,19 +11,50 @@ require_once __DIR__ . '/../vendor/autoload.php';
 try {
     $form = new Form();
 
-    $element = ElementFactory::make('InputText', 'FirstName');
+    /**
+     * Add Email Address
+     */
+    $firstName = ElementFactory::make('InputText', 'FirstName');
 
-    $element->setId('firstName');
+    $firstName->setId('firstName');
 
-    $element->addValidator(
+    $firstName->addValidator(
+        new \App\Validator\StringValidator()
+    );
+    $firstName->addFilter(
+        new \App\Filter\WordFilter()
+    );
+
+    $form->addElement($firstName);
+
+    /**
+     * Add Email Address
+     */
+    $email = ElementFactory::make('InputText', 'email');
+
+    $email->setId('email');
+
+    $email->addValidator(
         new \App\Validator\EmailValidator()
     );
-    $element->addFilter(
+    $email->addFilter(
         new \App\Filter\EmailFilter()
     );
 
-    $form->addElement($element);
+    $form->addElement($email);
 
+    /**
+     * Add Submit Button
+     */
+    $submit = ElementFactory::make('SubmitButton', 'submit');
+
+    $submit->setValue('Run Me!');
+
+    $form->addElement($submit);
+
+    /**
+     * Hydrate Form
+     */
     if (!empty($_POST)) {
         $form->hydrate($_POST);
     }
