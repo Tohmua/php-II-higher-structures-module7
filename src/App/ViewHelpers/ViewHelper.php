@@ -2,9 +2,7 @@
 
 namespace App\ViewHelpers;
 
-abstract class ViewHelper
+interface ViewHelper
 {
-    protected $field;
-
-    abstract public function display();
+    public function display(array $properties);
 }

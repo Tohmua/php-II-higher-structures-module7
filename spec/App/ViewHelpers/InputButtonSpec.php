@@ -14,25 +14,21 @@ class InputButtonSpec extends ObjectBehavior
 
     public function it_should_create_a_button_with_a_name()
     {
-        $this->beConstructedWith('name');
-        $this->display()->shouldReturn('<input type="button" name="name" value="" id="" class="" />');
+        $this->display(['name' => 'name'])->shouldReturn('<input type="button" name="name" value="" id="" class="" />');
     }
 
-    public function it_should_create_a_button_with_a_name_and_value()
+    public function it_should_create_a_button_with_a_value()
     {
-        $this->beConstructedWith('name', 'value');
-        $this->display()->shouldReturn('<input type="button" name="name" value="value" id="" class="" />');
+        $this->display(['value' => 'value'])->shouldReturn('<input type="button" name="" value="value" id="" class="" />');
     }
 
-    public function it_should_create_a_button_with_a_name_and_value_and_id()
+    public function it_should_create_a_button_with_a_id()
     {
-        $this->beConstructedWith('name', 'value', 'id');
-        $this->display()->shouldReturn('<input type="button" name="name" value="value" id="id" class="" />');
+        $this->display(['id' => 'id'])->shouldReturn('<input type="button" name="" value="" id="id" class="" />');
     }
 
-    public function it_should_create_a_button_with_a_name_and_value_and_id_and_class()
+    public function it_should_create_a_button_with_a_class()
     {
-        $this->beConstructedWith('name', 'value', 'id', 'class');
-        $this->display()->shouldReturn('<input type="button" name="name" value="value" id="id" class="class" />');
+        $this->display(['class' => 'class'])->shouldReturn('<input type="button" name="" value="" id="" class="class" />');
     }
 }

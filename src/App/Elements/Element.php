@@ -14,11 +14,18 @@ abstract class Element
     private $filters    = [];
     private $name       = '';
     private $value      = '';
+    private $properties = [];
 
     public function __construct($name, ViewHelper $viewHelper)
     {
-        $this->name       = $name;
+        $this->setProperty('name', $name);
         $this->viewHelper = $viewHelper;
+    }
+
+    public function setProperty($property, $value)
+    {
+        $this->properties[$property] = $value;
+        return $this;
     }
 
     public function addValidator(Validator $validator)
@@ -33,7 +40,7 @@ abstract class Element
 
     public function display()
     {
-        return $this->viewHelper->display();
+        return $this->viewHelper->display($this->properties);
     }
 
     public function get()
@@ -45,20 +52,22 @@ abstract class Element
     {
         $this->checkValueInArray($values);
 
-        $this->value = $values[$this->name];
+        $this->value = $values[$this->getName()];
 
         $this->applyFilters();
 
         $this->validate();
+
+        $this->setProperty('value', $this->value);
     }
 
     private function checkValueInArray($values)
     {
-        if (!in_array($this->name, array_keys($values))) {
+        if (!in_array($this->getName(), array_keys($values))) {
             throw new ElementException(
                 sprintf(
                     'Value "%s" has not been set',
-                    $this->name
+                    $this->getName()
                 )
             );
         }
@@ -84,5 +93,10 @@ abstract class Element
         if (!empty($errors)) {
             throw new ElementException(implode(PHP_EOL, $errors));
         }
+    }
+
+    private function getName()
+    {
+        return isset($this->properties['name']) ? $this->properties['name'] : null;
     }
 }

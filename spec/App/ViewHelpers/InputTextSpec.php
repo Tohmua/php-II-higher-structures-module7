@@ -14,25 +14,26 @@ class InputTextSpec extends ObjectBehavior
 
     public function it_should_return_an_input_field()
     {
-        $this->beConstructedWith();
-        $this->display()->shouldReturn('<input type="text" name="" id="" class="" />');
+        $this->display([])->shouldReturn('<input type="text" name="" id="" class="" value="" />');
     }
 
     public function it_should_return_an_input_field_with_name()
     {
-        $this->beConstructedWith('name');
-        $this->display()->shouldReturn('<input type="text" name="name" id="" class="" />');
+        $this->display(['name' => 'name'])->shouldReturn('<input type="text" name="name" id="" class="" value="" />');
     }
 
-    public function it_should_return_an_input_field_with_name_and_id()
+    public function it_should_return_an_input_field_with_id()
     {
-        $this->beConstructedWith('name', 'id');
-        $this->display()->shouldReturn('<input type="text" name="name" id="id" class="" />');
+        $this->display(['id' => 'id'])->shouldReturn('<input type="text" name="" id="id" class="" value="" />');
     }
 
-    public function it_should_return_an_input_field_name_and_id_and_class()
+    public function it_should_return_an_input_field_with_class()
     {
-        $this->beConstructedWith('name', 'id', 'class');
-        $this->display()->shouldReturn('<input type="text" name="name" id="id" class="class" />');
+        $this->display(['class' => 'class'])->shouldReturn('<input type="text" name="" id="" class="class" value="" />');
+    }
+
+    public function it_should_return_an_input_field_with_value()
+    {
+        $this->display(['value' => 'value'])->shouldReturn('<input type="text" name="" id="" class="" value="value" />');
     }
 }

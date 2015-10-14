@@ -15,7 +15,7 @@ class InputTextSpec extends ObjectBehavior
         $this->prophet = new Prophet();
         $prophacy = $this->prophet->Prophesize('App\ViewHelpers\InputText');
 
-        $prophacy->display()->willReturn('<input type="text" name="test" id="" class="" />');
+        $prophacy->display(['name' => 'test'])->willReturn('<input type="text" name="test" id="" class="" value="" />');
 
         $this->beConstructedWith('test', $prophacy->reveal());
     }
@@ -27,7 +27,7 @@ class InputTextSpec extends ObjectBehavior
 
     public function it_should_display()
     {
-        $this->display()->shouldReturn('<input type="text" name="test" id="" class="" />');
+        $this->display()->shouldReturn('<input type="text" name="test" id="" class="" value="" />');
     }
 
     public function it_should_not_hydrate_if_invalid_value_given()

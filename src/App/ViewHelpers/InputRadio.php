@@ -4,47 +4,24 @@ namespace App\ViewHelpers;
 
 use App\ViewHelpers\ViewHelper;
 
-class InputRadio extends ViewHelper
+class InputRadio implements ViewHelper
 {
-    private $name         = '';
-    private $values       = [];
-    private $checkedValue = '';
-
-    public function __construct($name = '', array $values = [], $checkedValue = '')
+    public function display(array $properties)
     {
-        $this->setName($name)
-             ->setValues($values)
-             ->setCheckedValue($checkedValue);
-    }
+        $inputs = [];
 
-    public function setName($name)
-    {
-        $this->name = $name;
-        return $this;
-    }
+        if (isset($properties['values'])) {
+            $inputs = array_map(function($value) use ($properties) {
+                $checked = (isset($properties['value']) && $properties['value'] == $value ? ' checked' : '');
 
-    public function setValues(array $values)
-    {
-        $this->values = $values;
-        return $this;
-    }
-
-    public function setCheckedValue($checkedValue)
-    {
-        $this->checkedValue = $checkedValue;
-        return $this;
-    }
-
-    public function display()
-    {
-        $inputs = array_map(function($value) {
-            return sprintf(
-                '<input type="radio" name="%s" value="%s"%s />',
-                $this->name,
-                $value,
-                $value == $this->checkedValue ? ' checked' : ''
-            );
-        }, $this->values);
+                return sprintf(
+                    '<input type="radio" name="%s" value="%s"%s />',
+                    isset($properties['name']) ? $properties['name'] : '',
+                    $value,
+                    $checked
+                );
+            }, $properties['values']);
+        }
 
         return implode(PHP_EOL, $inputs);
     }

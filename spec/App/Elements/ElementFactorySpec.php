@@ -14,16 +14,11 @@ class ElementFactorySpec extends ObjectBehavior
 
     public function it_should_return_input_text()
     {
-        $this::make('InputText')->shouldHaveType('App\Elements\InputText');
+        $this::make('InputText', 'test')->shouldHaveType('App\Elements\InputText');
     }
 
     public function it_should_throw_error_with_invalid_field()
     {
-        $this->shouldThrow('App\Elements\ElementException')->during('make', ['foo']);
-    }
-
-    public function it_should_throw_error_with_invalid_view_helper()
-    {
-        $this->shouldThrow('App\Elements\ElementException')->during('make', ['InputText', ['foo']]);
+        $this->shouldThrow('App\Elements\ElementException')->during('make', ['foo', 'bar']);
     }
 }
